@@ -11,9 +11,7 @@
 What does the R² score tell you about your model? What does it mean if R² is close to 1? What if it's close to 0?
 
 **YOUR ANSWER:**
-
-
-
+The R^2 score tells us how strong our linear relationship is. The closer to 1, the stronger, the closer to 0, the weaker. 
 
 ---
 
@@ -21,7 +19,9 @@ What does the R² score tell you about your model? What does it mean if R² is c
 What does the MSE (Mean Squared Error) mean in plain English? Why do you think we square the errors instead of just taking the average of the errors?
 
 **YOUR ANSWER:**
-
+It tells you how far your predictions are on average. 
+If the MSE is small, the model’s predictions are usually close to the real values.
+If the MSE is large, the model is often making big mistakes.
 
 
 

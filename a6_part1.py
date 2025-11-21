@@ -77,7 +77,7 @@ def split_data(data):
     """
     
     # TODO: Create X with the 'Hours' column (use double brackets to keep as DataFrame)
-    X = data['Hours']
+    X = data[['Hours']]
     # TODO: Create y with the 'Scores' column
     y = data['Scores']           # Target variable
 
@@ -115,7 +115,7 @@ def train_model(X_train, y_train):
     print(f"Intercept: {model.intercept_:.2f}")
     print(f"\nEquation: Sales = {model.coef_[0]:.2f} × Temperature + {model.intercept_:.2f}")
     
-    return evaluate_model
+    return model
 
 
 def evaluate_model(model, X_test, y_test):
@@ -166,27 +166,36 @@ def visualize_results(X_train, y_train, X_test, y_test, predictions, model):
         predictions: model predictions on test set
         model: trained model (to plot line of best fit)
     """
-    # TODO: Create a figure with size (12, 6)
+    plt.figure(figsize=(12, 6))
     
     # TODO: Plot training data as blue scatter points with label 'Training Data'
+    plt.scatter(X_train, y_train, color='blue', alpha=0.5, label='Training Data')
     
     # TODO: Plot test data (actual) as green scatter points with label 'Test Data (Actual)'
+    plt.scatter(X_test, y_test, color='green', alpha=0.7, label='Test Data (Actual)')
     
     # TODO: Plot predictions as red X markers with label 'Predictions'
+    plt.scatter(X_test, predictions, color='red', alpha=0.7, label='Predictions', marker='x', s=100)
     
     # TODO: Create and plot the line of best fit
     #       Hint: Create a range of X values, predict Y values, then plot as a black line
+    X_range = np.linspace(X_train.min(), X_train.max(), 100).reshape(-1, 1)
+    y_range = model.predict(X_range)
+    plt.plot(X_range, y_range, color='black', linewidth=2, label='Line of Best Fit')
     
     # TODO: Add x-axis label, y-axis label, and title
-    
-    # TODO: Add legend
-    
+    plt.xlabel('Hours (Hr)', fontsize=12)
+    plt.ylabel('Scores (Pts)', fontsize=12)
+    plt.title('Linear Regression: Score Prediction', fontsize=14, fontweight='bold')
+        # TODO: Add legend
+    plt.legend()
     # TODO: Add grid with alpha=0.3
-    
+    plt.grid(True, alpha=0.3)
     # TODO: Save the figure as 'predictions_plot.png' with dpi=300
-    
+    plt.savefig('scores.png', dpi=300, bbox_inches='tight')
+    print("\n✓ Predictions plot saved as 'score.png'")
     # TODO: Show the plot
-    pass
+    plt.show()        
 
 
 def make_prediction(model, hours):
@@ -201,13 +210,15 @@ def make_prediction(model, hours):
         predicted test score
     """
     # TODO: Reshape hours into the format the model expects: np.array([[hours]])
-    
+    temp_array = np.array([[hours]])
     # TODO: Make a prediction
+    predicted_sales = model.predict(temp_array)[0]
     
     # TODO: Print the prediction with a clear message
+    print(f"\n=== New Prediction ===")
+    print(f"If temperature is {hours}°F, predicted sales: ${predicted_sales:.2f}")
     
-    # TODO: Return the predicted score
-    pass
+    return predicted_sales    
 
 
 if __name__ == "__main__":
@@ -215,28 +226,40 @@ if __name__ == "__main__":
     print("STUDENT PERFORMANCE PREDICTION - YOUR ASSIGNMENT")
     print("=" * 70)
     
+    print("=" * 60)
+    print("ICE CREAM SALES PREDICTION - LINEAR REGRESSION EXAMPLE")
+    print("=" * 60)
+    
     # Step 1: Load and explore the data
     # TODO: Call load_and_explore_data() with 'student_scores.csv'
+    data = load_and_explore_data('student_scores.csv')
     
     # Step 2: Visualize the relationship
     # TODO: Call create_scatter_plot() with the data
+    create_scatter_plot(data)
     
     # Step 3: Split the data
     # TODO: Call split_data() and store the returned values
+    X_train, X_test, y_train, y_test = split_data(data)
     
     # Step 4: Train the model
     # TODO: Call train_model() with training data
+    model = train_model(X_train, y_train)
     
+
     # Step 5: Evaluate the model
     # TODO: Call evaluate_model() with the model and test data
+    predictions = evaluate_model(model, X_test, y_test)
     
     # Step 6: Visualize results
     # TODO: Call visualize_results() with all the necessary arguments
+    visualize_results(X_train, y_train, X_test, y_test, predictions, model)
     
     # Step 7: Make a new prediction
     # TODO: Call make_prediction() for a student who studied 7 hours
+    make_prediction(model, 85)
     
-    print("\n" + "=" * 70)
-    print("✓ Assignment complete! Check your saved plots.")
-    print("Don't forget to complete a6_part1_writeup.md!")
-    print("=" * 70) 
+    print("\n" + "=" * 60)
+    print("✓ Example complete! Check out the saved plots.")
+    print("=" * 60)
+
