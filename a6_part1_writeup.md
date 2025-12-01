@@ -32,7 +32,7 @@ Would you trust this model to predict a score for a student who studied 10 hours
 - What's the maximum hours in your dataset?
 - What happens when you make predictions outside the range of your training data?
 
-**YOUR ANSWER:**
+**YOUR ANSWER:**  I wouldn't trust the model since the maximum hours is at 9.6. Extrapolating the dataset might have other factors that what we've seen so far and therefore isn't a good idea. 
 
 
 
@@ -47,7 +47,7 @@ Looking at your scatter plot, describe the relationship between hours studied an
 - Linear or non-linear?
 - Positive or negative?
 
-**YOUR ANSWER:**
+**YOUR ANSWER:** strong, linear, and positive.
 
 
 
@@ -58,9 +58,9 @@ Looking at your scatter plot, describe the relationship between hours studied an
 What are some real-world factors that could affect test scores that this model doesn't account for? List at least 3 factors.
 
 **YOUR ANSWER:**
-1. 
-2. 
-3. 
+1. Sleep
+2. Stress
+3. Subject
 
 
 ---
@@ -71,7 +71,7 @@ What are some real-world factors that could affect test scores that this model d
 Why do we split our data into training and testing sets? What would happen if we trained and tested on the same data?
 
 **YOUR ANSWER:**
-
+We'd be answering data the model already has answers for, you want to test it to make sure it understands the pattern rather than memorize.
 
 
 
@@ -81,7 +81,7 @@ Why do we split our data into training and testing sets? What would happen if we
 What was the most challenging part of this assignment for you? How did you overcome it (or what help do you still need)?
 
 **YOUR ANSWER:**
-
+The challenging part was making sure my syntax was correct and that I was understanding what I was doing with every line of code. 
 
 
 
@@ -91,12 +91,12 @@ What was the most challenging part of this assignment for you? How did you overc
 
 ### Question 8: Future Applications
 Describe one real-world problem you could solve with linear regression. What would be your:
-- **Feature (X):** 
-- **Target (Y):** 
-- **Why this relationship might be linear:**
+- **Feature (X):** Website Revenue
+- **Target (Y):** Number of visitors to website. 
+- **Why this relationship might be linear:** The more customers, the more chances of purchases thus more revenue.
 
 **YOUR ANSWER:**
-
+Above ^
 
 
 
